@@ -25,3 +25,8 @@ mongosh "mongodb://localhost:27017"
 mongosh "mongodb://localhost:28015"
 
 mongosh --port 28015
+
+5. mongodb基本命令
+    * use <db_name> 可以创建新的db或者切换到某个db下面
+    * db 可以显示当前所在的db
+    * show collections 显示db下面的文档集合
