@@ -9,7 +9,7 @@ const GenreSchema = new Schema({
 
 // 虚拟属性'URL'：图书种类
 GenreSchema.virtual("url").get(function () {
-  return "/catalog/author/" + this.id;
+  return "/catalog/gener/" + this.id;
 });
 
 // 导出 Author 模型

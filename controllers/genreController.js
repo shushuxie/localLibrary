@@ -2,7 +2,17 @@ const Genre = require("../models/genre");
 
 // 显示完整的作者列表
 exports.genre_list = (req, res) => {
-  res.send("未实现：种类列表");
+    console.log("genre list request");
+    Genre.find()
+    .sort([["name","ascending"]])
+    .then((list_genres) => {
+      res.render("gener_list",{
+        title: "Gener List",
+        gener_list: list_genres
+      });
+    }).catch((err) => {
+      return next(err);
+    })
 };
 
 // 为每位作者显示详细信息的页面

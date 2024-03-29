@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h1= title
+
+  ul
+  each gener in gener_list
+    li
+      a(href=gener.url) #{gener.name}
+
+  else
+    li There are no geners.
