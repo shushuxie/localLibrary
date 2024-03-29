@@ -1,4 +1,4 @@
-const Bookinstance = require("../models/bookinstances");
+const BookInstance = require("../models/bookinstance");
 
 // 显示完整的作者列表
 // Display list of all BookInstances.
