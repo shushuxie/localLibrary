@@ -39,6 +39,7 @@ router.get("/books", book_controller.book_list);
 
 
 /// 藏书副本路由 ///
+router.get("/bookinstances",book_instance_controller.bookinstance_list);
 
 /// 藏书种类路由 ///
 

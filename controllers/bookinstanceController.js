@@ -1,9 +1,21 @@
-const Bookinstance = require("../models/bookinstance");
+const Bookinstance = require("../models/bookinstances");
 
 // 显示完整的作者列表
-exports.bookinstance_list = (req, res) => {
-  res.send("未实现：作者列表");
+// Display list of all BookInstances.
+exports.bookinstance_list = function (req, res, next) {
+  BookInstance.find()
+    .populate("book")
+    .then((list_bookinstances) => {
+      // Successful, so render
+      res.render("bookinstance_list", {
+        title: "Book Instance List",
+        bookinstance_list: list_bookinstances,
+      });
+    }).catch((err) => {
+      // return next(err);
+    });
 };
+
 
 // 为每位作者显示详细信息的页面
 exports.bookinstance_detail = (req, res) => {

@@ -8,10 +8,12 @@
   },
   "dependencies": {
     "async": "^3.2.5",
+    "bootstrap": "^5.3.3",
     "cookie-parser": "~1.4.4",
     "core-js": "^3.36.1",
     "debug": "~2.6.9",
     "express": "^4.19.2",
+    "express-async-handler": "^1.2.0",
     "http-errors": "~1.6.3",
     "mongoose": "^8.2.3",
     "morgan": "~1.9.1",

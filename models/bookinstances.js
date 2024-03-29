@@ -22,4 +22,4 @@ BookInstanceSchema.virtual("url").get(function () {
 });
 
 // 导出 BookInstance 模型
-module.exports = mongoose.model("BookInstance", BookInstanceSchema);
+module.exports = mongoose.model("BookInstances", BookInstanceSchema);
