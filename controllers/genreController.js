@@ -2,7 +2,7 @@ const Genre = require("../models/genre");
 
 // 显示完整的作者列表
 exports.genre_list = (req, res) => {
-  res.send("未实现：作者列表");
+  res.send("未实现：种类列表");
 };
 
 // 为每位作者显示详细信息的页面
