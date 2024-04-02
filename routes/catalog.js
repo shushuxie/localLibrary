@@ -43,6 +43,7 @@ router.get("/bookinstances",book_instance_controller.bookinstance_list);
 
 /// 藏书种类路由 ///
 router.get("/genres",genre_controller.genre_list);
+router.get("/genre/:id",genre_controller.genre_detail);
 
 /// 作者路由 ///
 router.get("/authors",author_controller.author_list);
