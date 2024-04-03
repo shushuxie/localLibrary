@@ -57,6 +57,8 @@ exports.genre_detail = async function (req, res, next) {
       err.status = 404;  
       return next(err);  
     }  
+
+    
   
     // Successful, so render  
     res.render("genre_detail", {  
@@ -74,7 +76,7 @@ exports.genre_detail = async function (req, res, next) {
 
 
 
-  
+
 
 
 
