@@ -70,7 +70,14 @@ exports.genre_detail = async function (req, res, next) {
   }  
 
 
+
+
+
+
   
+
+
+
 };
 
 // 由 GET 显示创建作者的表单
