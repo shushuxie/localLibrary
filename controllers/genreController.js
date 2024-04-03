@@ -9,8 +9,8 @@ exports.genre_list = (req, res) => {
     Genre.find()
     .sort([["name","ascending"]])
     .then((list_genres) => {
-      res.render("gener_list",{
-        title: "Gener List",
+      res.render("genre_list",{
+        title: "Genre List",
         gener_list: list_genres
       });
     }).catch((err) => {
@@ -18,53 +18,56 @@ exports.genre_list = (req, res) => {
     })
 };
 
-// 为每位作者显示详细信息的页面
-// Display detail page for a specific Genre.
-exports.genre_detail = function (req, res, next) {
-  console.log("===========genre detail quest========"+req.params.id);
-  // console.log("findby id result = "+ JSON.stringify(Genre.findById(req.params.id)));
-  Genre.findById(req.params.id)
-  .then(genre => {
-    // 在这里处理找到的文档对象
-    const genreJSON = JSON.stringify(genre);
-    console.log("genrel = "+genreJSON);
-    // 进行后续操作
-  })
-  .catch(err => {
-    // 处理错误
-  });
-  async.parallel(
-    {
-      genre: function (callback) {
-        Genre.findById(req.params.id).then(callback).catch((err)=>{
-          return next(err);
-        });
-      },
-      genre_books: function (callback) {
-        Book.find({ genre: req.params.id }).then(callback).catch((err) => {
-          return next(err);
-        });
-      },
-    },
-    function (err, results) {
-      console.log("result = " + JSON.stringify(results.genre))
-      if (err) {
-        return next(err);
-      }
-      if (results.genre == null) {
-        // No results.
-        var err = new Error("Genre not found");
-        err.status = 404;
-        return next(err);
-      }
-      // Successful, so render
-      res.render("genre_detail", {
-        title: "Genre Detail",
-        genre: results.genre,
-        genre_books: results.genre_books,
-      });
-    },
-  );
+// 类型详情页面
+// exports.genre_detail = function (req, res, next) {
+//   Promise.all([
+//     Genre.findById(req.params.id).exec(),
+//     Book.find({ genre: req.params.id }).exec(),
+//   ])
+//     .then(([genre, genre_books]) => {
+//       if (!genre) {
+//         // No results.
+//         const err = new Error("Genre not found");
+//         err.status = 404;
+//         throw err;
+//       }
+
+//       // Successful, so render
+//       res.render("genre_detail", {
+//         title: "Genre Detail",
+//         genre: genre,
+//         genre_books: genre_books,
+//       });
+//     })
+//     .catch((err) => next(err));
+// };
+
+// Display detail page for a specific Genre.  
+exports.genre_detail = async function (req, res, next) {  
+  try {  
+    // 使用Promise.all并行执行多个异步操作  
+    const [genre, genre_books] = await Promise.all([  
+      Genre.findById(req.params.id).exec(), // 返回Promise  
+      Book.find({ genre: req.params.id }).exec(), // 返回Promise  
+    ]);  
+  
+    if (!genre) {  
+      // No results.  
+      const err = new Error("Genre not found");  
+      err.status = 404;  
+      return next(err);  
+    }  
+  
+    // Successful, so render  
+    res.render("genre_detail", {  
+      title: "Genre Detail",  
+      genre: genre,  
+      genre_books: genre_books,  
+    });  
+  } catch (err) {  
+    // 捕获任何在Promise.all中发生的错误  
+    return next(err);  
+  }  
 };
 
 // 由 GET 显示创建作者的表单
