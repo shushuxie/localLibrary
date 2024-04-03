@@ -68,6 +68,9 @@ exports.genre_detail = async function (req, res, next) {
     // 捕获任何在Promise.all中发生的错误  
     return next(err);  
   }  
+
+
+  
 };
 
 // 由 GET 显示创建作者的表单
