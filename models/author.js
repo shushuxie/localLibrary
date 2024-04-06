@@ -17,10 +17,22 @@ AuthorSchema.virtual("name").get(function () {
 
 // 虚拟属性'lifespan'：作者寿命
 AuthorSchema.virtual("lifespan").get(function () {
-  return (
-    this.date_of_death.getYear() - this.date_of_birth.getYear()
-  ).toString();
+  const birth = this.date_of_birth;
+  const death = this.date_of_death || new Date(); // 使用当前日期作为默认值
+  const diffTime = Math.abs(death - birth);
+  const diffYears = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 365)); // 计算年份差
+  return diffYears;
 });
+
+
+AuthorSchema.virtual("birth_of_birth_format").get(function () {
+  return moment(this.date_of_birth).format("YYYY年M月D号");
+});
+
+AuthorSchema.virtual("birth_of_death_format").get(function () {
+  return moment(this.date_of_death).format("YYYY年M月D号");
+});
+
 
 // 虚拟属性'url'：作者 URL
 AuthorSchema.virtual("url").get(function () {

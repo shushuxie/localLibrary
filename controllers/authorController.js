@@ -5,7 +5,6 @@ const e = require("express");
 
 
 // 显示完整的作者列表
-// Display list of all Authors.
 exports.author_list = function (req, res, next) {
   console.log("author list request");
   Author.find()
@@ -23,7 +22,6 @@ exports.author_list = function (req, res, next) {
 
 
 // 为每位作者显示详细信息的页面
-// Display detail page for a specific Author.
 exports.author_detail = async function (req, res, next) {
   try{
     const [author,author_books] = await Promise.all([
