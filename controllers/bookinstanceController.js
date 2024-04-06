@@ -18,9 +18,30 @@ exports.bookinstance_list = function (req, res, next) {
 
 
 // 为每位作者显示详细信息的页面
-exports.bookinstance_detail = (req, res) => {
-  res.send("未实现：作者详细信息：" + req.params.id);
+exports.bookinstance_detail = function (req, res, next) {
+  BookInstance.findById(req.params.id)
+    .populate("book")
+    .exec()
+    .then(function(bookinstance) {
+      if (bookinstance == null) {
+        // No results.
+        var err = new Error("Book copy not found");
+        err.status = 404;
+        return Promise.reject(err);
+      }
+      // Successful, so render.
+      res.render("bookinstance_detail", {
+        title: "Book:",
+        bookinstance: bookinstance,
+      });
+    })
+    .catch(function(err) {
+      // Handle error.
+      return next(err);
+    });
 };
+
+
 
 // 由 GET 显示创建作者的表单
 exports.bookinstance_create_get = (req, res) => {

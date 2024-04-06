@@ -40,6 +40,7 @@ router.get("/books", book_controller.book_list);
 
 /// 藏书副本路由 ///
 router.get("/bookinstances",book_instance_controller.bookinstance_list);
+router.get("/bookinstance/:id",book_instance_controller.bookinstance_detail);
 
 /// 藏书种类路由 ///
 router.get("/genres",genre_controller.genre_list);
