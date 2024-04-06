@@ -47,5 +47,6 @@ router.get("/genre/:id",genre_controller.genre_detail);
 
 /// 作者路由 ///
 router.get("/authors",author_controller.author_list);
+router.get("/author/:id",author_controller.author_detail);
 
 module.exports = router;

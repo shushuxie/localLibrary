@@ -1,4 +1,8 @@
 const Author = require("../models/author");
+var async = require("async");
+var Book = require("../models/book");
+const e = require("express");
+
 
 // 显示完整的作者列表
 // Display list of all Authors.
@@ -19,9 +23,31 @@ exports.author_list = function (req, res, next) {
 
 
 // 为每位作者显示详细信息的页面
-exports.author_detail = (req, res) => {
-  res.send("未实现：作者详细信息：" + req.params.id);
+// Display detail page for a specific Author.
+exports.author_detail = async function (req, res, next) {
+  try{
+    const [author,author_books] = await Promise.all([
+        Author.findById(req.params.id).exec(),
+        Book.find({ author: req.params.id }, "title summary").exec()
+    ]);
+
+    if (!author) {
+      const err = new Error("aothor not found");
+      err.status = 404;
+      return next(err);
+    }
+
+    // Successful, so render.
+    res.render("author_detail", {
+      title: "Author Detail",
+      author: author,
+      author_books:author_books,
+    });
+  } catch(err) {
+    return next(err);
+  }
 };
+
 
 // 由 GET 显示创建作者的表单
 exports.author_create_get = (req, res) => {
