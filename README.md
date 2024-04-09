@@ -30,3 +30,11 @@ mongosh --port 28015
     * use <db_name> 可以创建新的db或者切换到某个db下面
     * db 可以显示当前所在的db
     * show collections 显示db下面的文档集合
+
+
+* https://deb.nodesource.com/setup_16.x — Node.js 16 "Gallium"
+   * https://deb.nodesource.com/setup_18.x — Node.js 18 LTS "Hydrogen" (recommended)
+   * https://deb.nodesource.com/setup_19.x — Node.js 19 "Nineteen"
+   * https://deb.nodesource.com/setup_20.x — Node.js 20 "Iron" (current)
+
+    curl -fsSL  https://deb.nodesource.com/setup_16.x  | sudo -E bash -
